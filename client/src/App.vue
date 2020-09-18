@@ -1,41 +1,49 @@
 <template>
-  <div id="app" class="container">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/login" v-if="!isAuthenticated">Login</router-link> |
-      <a href="#" @click="logout" v-if="isAuthenticated">Logout</a> |
-
-      <router-link to="/user/vasya">Go to Vasya</router-link> |
-      <router-link to="/user/sergey">Go to Sergey</router-link>
+  <div id="app">
+    <navigation />
+    <div class="main-container">
+      <center-container>
+        <router-view />
+      </center-container>
     </div>
-    <router-view />
+    <sqreen-footer />
   </div>
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import Navigation from "components/navigation";
+import { USER_REQUEST } from "actions/user";
+import SqreenFooter from "./components/footer/index.vue";
+
 export default {
-  name: "App", 
-    created: function() {
-      console.log('app created')
-    if (!this.$store.getters.isAuthenticated) {
-      //this.$store.dispatch('AUTH_LOGIN');
-      this.$router.push('/login');
-    }
+  components: {
+    SqreenFooter,
+    Navigation
   },
-  methods: {
-    logout: function() {
-      console.log('logout');
-      this.$store.dispatch('AUTH_LOGOUT')
-        .then(() => {
-          this.$router.push("/login");
-          //this.$router.replace("/login")
-        }).catch(err=>{console.log(err)});
+  name: "app",
+  created: function() {
+    if (this.$store.getters.isAuthenticated) {
+      this.$store.dispatch(USER_REQUEST);
     }
-  },
-  computed: {
-    ...mapGetters(['isAuthenticated']),
   }
 };
 </script>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  color: #2e426b;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+</style>
+
+<style scoped>
+.main-container {
+  min-height: calc(100vh - 70px);
+}
+</style>

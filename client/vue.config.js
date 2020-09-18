@@ -1,19 +1,15 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-//  outputDir: path.resolve(__dirname, "../public/dist"),
-//  assetsDir: "../dist",
   lintOnSave: false,
+  runtimeCompiler: true,
   configureWebpack: {
-    optimization: {
-      splitChunks: false
-    }
-  },
-  filenameHashing: false,
-  pages: {
-    app: {
-      entry: "src/main.js",
-      filename: "index.html"
+    resolve: {
+      alias: {
+        components: path.resolve(__dirname, 'src/components/'),
+        actions: path.resolve(__dirname, 'src/store/actions'),
+        utils: path.resolve(__dirname, 'src/utils')
+      }
     }
   }
 };

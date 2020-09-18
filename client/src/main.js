@@ -1,20 +1,21 @@
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
-import VueResource from "vue-resource";
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import App from "./App.vue";
+import App from "./App";
 import router from "./router";
 import store from "./store";
+import Loading from "components/lib/loading";
+import CenterContainer from "components/lib/center-container";
 
-
-Vue.use(VueResource);
 Vue.config.productionTip = false;
-Vue.prototype.$appUrl = "http://localhost:3000/";
 
-
+Vue.component("loading", Loading);
+Vue.component("center-container", CenterContainer);
+/* eslint-disable no-new */
 new Vue({
+  el: "#app",
   router,
   store,
-  render: h => h(App)
-}).$mount("#app");
+  template: "<App/>",
+  components: { App }
+});

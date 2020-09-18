@@ -28,7 +28,7 @@ app.use('/public',
 
 app.use('/img',
     express['static'](path.join(__dirname, './../client/dist/img')));
-app.use(favicon(path.join(__dirname, './../client/dist/', 'favicon.ico')))
+//app.use(favicon(path.join(__dirname, './../client/dist/', 'favicon.ico')))
 
 const getActiveSession = async (token) => {
   console.log({token})
@@ -78,9 +78,9 @@ app.post('/login', (req, res) => {
       session.set(token, user._id.toString());
       
       res.json({status: 'OK', token});
-    } 
-    
-    res.sendStatus(403);
+    } else {
+      res.sendStatus(403);
+    }
   })
 })
 

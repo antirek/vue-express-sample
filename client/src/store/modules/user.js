@@ -1,6 +1,7 @@
-//import apiCall from "../../api/client";
+import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from "../actions/user";
+import apiCall from "utils/api";
 import Vue from "vue";
-import axios from 'axios';
+import { AUTH_LOGOUT } from "../actions/auth";
 
 const state = { status: "", profile: {} };
 
@@ -10,33 +11,34 @@ const getters = {
 };
 
 const actions = {
-  USER_REQUEST: ({ commit, dispatch }) => {
-    commit('USER_REQUEST');
-    const token = localStorage.getItem("api-token");
-    axios.get("http://localhost:3000/me", {headers: {'API-Token': token}})
+  [USER_REQUEST]: ({ commit, dispatch }) => {
+    commit(USER_REQUEST);
+    apiCall.get("/me")
       .then(resp => {
-        commit('USER_SUCCESS', resp);
+        commit(USER_SUCCESS, resp.data);
       })
       .catch(() => {
-        commit('USER_ERROR');
+        commit(USER_ERROR);
         // if resp is unauthorized, logout, to
-        dispatch('AUTH_LOGOUT');
+        dispatch(AUTH_LOGOUT);
       });
   }
 };
 
 const mutations = {
-  USER_REQUEST: state => {
+  [USER_REQUEST]: state => {
     state.status = "loading";
   },
-  USER_SUCCESS: (state, resp) => {
+  [USER_SUCCESS]: (state, data) => {
     state.status = "success";
-    Vue.set(state, "profile", resp);
+    const d = data;
+    d.name = 'sergey';
+    Vue.set(state, "profile", d);
   },
-  USER_ERROR: state => {
+  [USER_ERROR]: state => {
     state.status = "error";
   },
-  AUTH_LOGOUT: state => {
+  [AUTH_LOGOUT]: state => {
     state.profile = {};
   }
 };
