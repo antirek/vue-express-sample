@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 
-const db = mongoose.connect('mongodb://mongodb/smbot', { 
+const db = mongoose.connect(config.mongodb, { 
   useNewUrlParser: true,
 });
 
@@ -84,6 +84,6 @@ app.post('/login', (req, res) => {
   })
 })
 
-app.listen(3000, () => {
-  console.log('started', config.webapp);
+app.listen(config.port, () => {
+  console.log('started', config);
 });
