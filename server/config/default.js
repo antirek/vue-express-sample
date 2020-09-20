@@ -1,5 +1,5 @@
 
 module.exports = {
   port: 3000,
-  mongodb: 'mongodb://mongodb/testdb',
+  mongodb: 'mongodb://mongodb/smbot',
 }

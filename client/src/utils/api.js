@@ -1,17 +1,26 @@
 import axios from 'axios';
+import store from './../store';
 
-
+const baseUrl = 'http://localhost:3000';
 
 const apiCall = {
   get: async (url) => {
-    const token = localStorage.getItem('user-token');
-    const reqUrl = 'http://localhost:3000' + url;
-    return await axios.get(reqUrl, {headers: {'API-Token': token}});
+    const reqUrl = baseUrl + url;
+    const token = store.getters.token;
+    return await axios.get(reqUrl, {
+      headers: {
+        'API-Token': token,
+      }
+    });
   },
   post: async (url, data) => {
-    const token = localStorage.getItem('user-token');
-    const reqUrl = 'http://localhost:3000' + url;
-    return await axios.post(reqUrl, data, {headers: {'API-Token': token}});
+    const reqUrl = baseUrl + url;
+    const token = store.getters.token;
+    return await axios.post(reqUrl, data, {
+      headers: {
+        'API-Token': token,
+      }
+    });
   }
 }
  
