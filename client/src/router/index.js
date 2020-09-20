@@ -3,6 +3,8 @@ import Router from "vue-router";
 import Home from "components/home";
 import Account from "components/account";
 import Login from "components/login";
+import ItemsList from "components/items";
+
 import store from "../store";
 
 Vue.use(Router);
@@ -35,13 +37,19 @@ export default new Router({
       path: "/account",
       name: "Account",
       component: Account,
-      beforeEnter: ifAuthenticated
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: "/items",
+      name: "Items",
+      component: ItemsList,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: "/login",
       name: "Login",
       component: Login,
-      beforeEnter: ifNotAuthenticated
-    }
+      beforeEnter: ifNotAuthenticated,
+    },
   ]
 });

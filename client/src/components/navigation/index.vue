@@ -10,6 +10,9 @@
           >
         </router-link>
       </li>
+      <li>
+        <router-link to="/items"><span>Catalog</span></router-link>
+      </li>
     </ul>
     <ul>
       <li v-if="isProfileLoaded">
@@ -66,7 +69,10 @@ export default {
   name: "navigation",
   methods: {
     logout: function() {
-      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push("/login"));
+      this.$store.dispatch(AUTH_LOGOUT)
+        .then(() => {
+          this.$router.push("/login");
+        });
     }
   },
   computed: {
