@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-if="items">
+    <div >
       <h3>Items List</h3>
       <router-link :to="{path:'/items/new'}"> add </router-link>
-      <ul>
+      <ul v-if="items">
         <li v-for="(item, index) in items" :key="item.title">
           <router-link :to="{ path: '/items/' + item._id }">
             {{ index }} - {{ item.title }}
