@@ -2,6 +2,7 @@
   <div>
     <div v-if="items">
       <h3>Items List</h3>
+      <router-link :to="{path:'/items/new'}"> add </router-link>
       <ul>
         <li v-for="(item, index) in items" :key="item.title">
           <router-link :to="{ path: '/items/' + item._id }">
@@ -10,7 +11,6 @@
         </li>
       </ul>
       <br/>
-      <a href="#" v-on:click="show">show</a>
       <router-view />
     </div>
   </div>
@@ -31,12 +31,6 @@ export default {
     this.getList();
   },
   methods: {
-    alert: function () {
-      console.log('dbdb')
-    },
-    show: function () {
-      console.log(this.$listeners);
-    },
     getList: function () {
       api.get('/items').then(res => {
         this.items = res.data;

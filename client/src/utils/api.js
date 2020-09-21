@@ -22,7 +22,17 @@ const apiCall = {
         'API-Token': token,
       }
     });
-  }
+  },
+  delete: async (url) => {
+    const reqUrl = baseUrl + url;
+    const token = store.getters.token;
+    console.log('url', url, reqUrl);
+    return await axios.delete(reqUrl, {
+      headers: {
+        'API-Token': token,
+      }
+    });
+  },
 }
 
 export default apiCall;

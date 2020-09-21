@@ -1,0 +1,39 @@
+<template>
+  <div>
+    profile add
+    <div v-if="profile">
+      <h2>{{ profile.title }}</h2>
+      <input v-model="profile.title" placeholder="title" />
+      <input v-model="profile.data" placeholder="data" />
+      <input type="button" value="send" @click="sendProfile()" />
+    </div>
+  </div>
+</template>
+
+<script>
+import api from 'utils/api';
+
+export default {
+  name: "UserNew",
+  data: function() {
+    return {
+      profile: {
+        title: '',
+        data: '',
+      },
+    };
+  },
+  methods: {
+    sendProfile: function() {
+      api.post('/items/', this.profile)
+        .then(res => {
+          this.$bus.emit('updatelist', {data:'1'});
+          this.$router.push('/items/' + this.profile._id + '/profile');
+        });
+    }
+  }
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped></style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    profile
+    profile view
     <div v-if="profile">
       <h2>{{ profile.title }}</h2>
       <p>{{ profile.data }}</p>
@@ -10,7 +10,6 @@
 </template>
 
 <script>
-
 import api from 'utils/api';
 
 export default {
@@ -21,16 +20,17 @@ export default {
     };
   },
   watch: {
-    $route: "getProfile"
+    $route: "getProfile",
   },
   created: function() {
     this.getProfile();
   },
   methods: {
     getProfile: function() {
-      api.get('/items/' + this.$route.params.id).then(res=>{
-        this.profile = res.data;
-      })
+      api.get('/items/' + this.$route.params.id)
+        .then(res=>{
+          this.profile = res.data;
+        });
     }
   }
 };

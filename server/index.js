@@ -104,6 +104,25 @@ app.get('/items/:id', async (req, res)=>{
   res.json(item);
 });
 
+app.delete('/items/:id', async (req, res)=>{
+  const id = req.params.id;
+  const item = await Item.deleteOne({_id: id});
+  res.sendStatus(200);
+});
+
+app.post('/items/', async (req, res)=>{
+  const body = req.body;
+
+  const item = new Item(body);
+  const savedItem = await item.save();
+  console.log({savedItem});
+  if(!savedItem) {
+    res.sendStatus(500);
+    return;
+  }
+  res.json(savedItem);
+});
+
 app.post('/items/:id', async (req, res)=>{
   const id = req.params.id;
   const body = req.body;
