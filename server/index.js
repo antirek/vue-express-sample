@@ -10,7 +10,7 @@ const db = mongoose.connect(config.mongodb, {
   useNewUrlParser: true,
 });
 
-const User = require('./models').User;
+const {Item, User} = require('./models');
 const session = require('./session');
 
 const app = express();
@@ -62,27 +62,62 @@ app.get('/me', prepare, (req,res) => {
   res.json({username, title, phone});
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   console.log('req', req.body);
 
-  User.findOne({username: req.body.username}).then((user) => {
-    console.log('user', user);
-    if(!user) {
-      res.sendStatus(403);
-      return;
-    }
+  const user = await User.findOne({username: req.body.username});
+  console.log('user', user);
+  if(!user) {
+    res.sendStatus(403);
+    return;
+  }
 
-    if (user.password === req.body.password) {
-      console.log('password: ok');
-      const token = uuidv4();
-      session.set(token, user._id.toString());
-      
-      res.json({status: 'OK', token});
-    } else {
-      res.sendStatus(403);
-    }
-  })
-})
+  if (user.password === req.body.password) {
+    console.log('password: ok');
+    const token = uuidv4();
+    session.set(token, user._id.toString());
+    
+    res.json({status: 'OK', token});
+  } else {
+    res.sendStatus(403);
+  }
+});
+
+app.get('/items', async (req, res)=>{
+  const items = await Item.find({});
+  console.log({items});
+  if(!items || items.length === 0) {
+    res.sendStatus(404);
+    return;
+  }
+  res.json(items);
+});
+
+app.get('/items/:id', async (req, res)=>{
+  const id = req.params.id;
+  const item = await Item.findOne({_id: id});
+  console.log({item});
+  if(!item) {
+    res.sendStatus(404);
+    return;
+  }
+  res.json(item);
+});
+
+app.post('/items/:id', async (req, res)=>{
+  const id = req.params.id;
+  const body = req.body;
+
+  const item = await Item.findOneAndUpdate({_id: id}, body, {
+    returnOriginal: false,
+  });
+  console.log({item});
+  if(!item) {
+    res.sendStatus(404);
+    return;
+  }
+  res.json(item);
+});
 
 app.listen(config.port, () => {
   console.log('started', config);

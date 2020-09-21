@@ -4,6 +4,7 @@ import Home from "components/home";
 import Account from "components/account";
 import Login from "components/login";
 import ItemsList from "components/items";
+import ItemsRoutes from "components/items/_routes"
 
 import store from "../store";
 
@@ -26,7 +27,7 @@ const ifAuthenticated = (to, from, next) => {
 };
 
 export default new Router({
-  mode: "history",
+
   routes: [
     {
       path: "/",
@@ -44,6 +45,7 @@ export default new Router({
       name: "Items",
       component: ItemsList,
       beforeEnter: ifAuthenticated,
+      children: ItemsRoutes,
     },
     {
       path: "/login",

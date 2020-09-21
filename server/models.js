@@ -8,3 +8,12 @@ const User = mongoose.model('User', new mongoose.Schema({
 }));
 
 exports.User = User;
+
+
+const Item = mongoose.model('Item', new mongoose.Schema({
+  title: String,
+  data: String,
+}));
+
+
+exports.Item = Item;

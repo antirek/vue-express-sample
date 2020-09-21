@@ -7,6 +7,7 @@ const apiCall = {
   get: async (url) => {
     const reqUrl = baseUrl + url;
     const token = store.getters.token;
+    console.log('url', url, reqUrl);
     return await axios.get(reqUrl, {
       headers: {
         'API-Token': token,
@@ -23,5 +24,5 @@ const apiCall = {
     });
   }
 }
- 
+
 export default apiCall;

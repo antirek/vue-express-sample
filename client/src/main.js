@@ -6,11 +6,17 @@ import router from "./router";
 import store from "./store";
 import Loading from "components/lib/loading";
 import CenterContainer from "components/lib/center-container";
+import axios from 'axios';
 
 Vue.config.productionTip = false;
+Vue.prototype.$http = axios;
 
 Vue.component("loading", Loading);
 Vue.component("center-container", CenterContainer);
+
+import VueBus from 'vue-bus';
+Vue.use(VueBus);
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
