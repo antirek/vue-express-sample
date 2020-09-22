@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-if="items">
+  <div class="row">
+    <div v-if="items" class="col col-md-4">
       <h3>Items List</h3>
       <router-link :to="{path:'/items/new'}"> add </router-link>
       <ul>
@@ -11,8 +11,9 @@
         </li>
       </ul>
       <br/>
-      <router-view />
+      
     </div>
+    <router-view class="col col-md-8"/>
   </div>
 </template>
 

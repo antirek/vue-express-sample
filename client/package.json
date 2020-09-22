@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "bootstrap": "^4.5.2",
     "core-js": "^3.4.4",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
     "resource-axios": "^1.2.5",
     "vue": "^2.6.10",
     "vue-bus": "^1.2.1",

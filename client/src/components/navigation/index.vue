@@ -1,31 +1,34 @@
 /** * Created by vouill on 11/13/17. */
 
 <template>
-  <div class="navigation">
-    <ul>
-      <li>
-        <router-link class="brand" to="/">
-          <img src="../../assets/logo.png" width="40px" /><strong
-            >DOGEBOOK</strong
-          >
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/items"><span>Catalog</span></router-link>
-      </li>
-    </ul>
-    <ul>
-      <li v-if="isProfileLoaded">
-        <router-link to="/account">{{ name }}</router-link>
-      </li>
-      <li v-if="isAuthenticated" @click="logout">
-        <span class="logout">Logout</span>
-      </li>
-      <li v-if="!isAuthenticated && !authLoading">
-        <router-link to="/login">Login</router-link>
-      </li>
-    </ul>
-  </div>
+  <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <router-link class="navbar-brand" to="/">
+      <img src="../../assets/logo.png" width="40px" /><strong
+        >DOGEBOOK</strong
+      >
+    </router-link>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <router-link to="/items" class="nav-link"><span>Catalog</span></router-link>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto ">
+        <li class="nav-item" v-if="isProfileLoaded">
+          <router-link to="/account" class="nav-link">{{ name }}</router-link>
+        </li>
+        <li class="nav-item" v-if="isAuthenticated" @click="logout">
+          <span class="nav-link">Logout</span>
+        </li>
+        <li class="nav-item" v-if="!isAuthenticated && !authLoading">
+          <router-link to="/login" class="nav-link">Login</router-link>
+        </li>
+      </ul>
+    </div>   
+  </nav>
 </template>
 
 <style lang="scss" scoped>

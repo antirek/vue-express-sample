@@ -7,6 +7,9 @@ import store from "./store";
 import Loading from "components/lib/loading";
 import CenterContainer from "components/lib/center-container";
 import axios from 'axios';
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;

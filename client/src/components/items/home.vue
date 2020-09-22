@@ -15,7 +15,7 @@ export default {
   name: "UserHome",
   methods: {
     drop: function () {
-      api.delete('/items/' + this.$route.params.id).then(res=>{
+      api.delete('/items/' + this.$route.params.id).then(res => {
         this.$bus.emit('updatelist', {data:'1'});
         this.$router.push('/items/');
       })
