@@ -28,7 +28,7 @@ export default {
       api.post('/items/', this.profile)
         .then(res => {
           this.$bus.emit('updatelist', {data:'1'});
-          this.$router.push('/items/' + this.profile._id + '/profile');
+          this.$router.push('/items/' + res.data._id + '/profile');
         });
     }
   }
