@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import api from 'utils/api';
+import {Item} from 'utils/api';
 
 export default {
   name: "UserNew",
@@ -25,9 +25,9 @@ export default {
   },
   methods: {
     sendProfile: function() {
-      api.post('/items/', this.profile)
+      Item.post(this.profile)
         .then(res => {
-          this.$bus.emit('updatelist', {data:'1'});
+          this.$bus.emit('items.updatelist');
           this.$router.push('/items/' + res.data._id + '/profile');
         });
     }

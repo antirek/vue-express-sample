@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import api from 'utils/api';
+import {Item} from 'utils/api';
 
 export default {
   name: 'itemsList',
@@ -33,9 +33,10 @@ export default {
   },
   methods: {
     getList: function () {
-      api.get('/items').then(res => {
-        this.items = res.data;
-      })
+      Item.query()
+        .then(res => {
+          this.items = res.data;
+        })
     }
   },
 }

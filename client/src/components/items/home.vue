@@ -9,16 +9,17 @@
 </template>
 
 <script>
-import api from 'utils/api';
+import {Item} from 'utils/api';
 
 export default {
   name: "UserHome",
   methods: {
     drop: function () {
-      api.delete('/items/' + this.$route.params.id).then(res => {
-        this.$bus.emit('items.updatelist');
-        this.$router.push('/items/');
-      })
+      Item.delete(this.$route.params.id)
+        .then(res => {
+          this.$bus.emit('items.updatelist');
+          this.$router.push('/items/');
+        })
     }
   }
 };

@@ -1,7 +1,18 @@
 import axios from 'axios';
 import store from './../store';
+import resource from 'resource-axios';
 
 const baseUrl = 'http://localhost:3000';
+
+axios.interceptors.request.use(function (config) {
+  const token = store.getters.token;
+  config.headers['API-Token'] = token;
+  return config;
+});
+
+const Item = resource(baseUrl + '/items', axios);
+
+export {Item};
 
 const apiCall = {
   get: async (url) => {

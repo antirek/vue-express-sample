@@ -123,7 +123,7 @@ app.post('/items/', async (req, res)=>{
   res.json(savedItem);
 });
 
-app.post('/items/:id', async (req, res)=>{
+app.put('/items/:id', async (req, res)=>{
   const id = req.params.id;
   const body = req.body;
 

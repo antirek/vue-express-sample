@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import api from 'utils/api';
+import {Item} from 'utils/api';
 
 export default {
   name: "UserProfile",
@@ -27,8 +27,8 @@ export default {
   },
   methods: {
     getProfile: function() {
-      api.get('/items/' + this.$route.params.id)
-        .then(res=>{
+      Item.get(this.$route.params.id)
+        .then(res => {
           this.profile = res.data;
         });
     }
