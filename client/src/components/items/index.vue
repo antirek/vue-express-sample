@@ -28,7 +28,7 @@ export default {
     }
   },
   created: function () {
-    this.$bus.on('updatelist', this.getList);
+    this.$bus.on('items.updatelist', this.getList);
     this.getList();
   },
   methods: {

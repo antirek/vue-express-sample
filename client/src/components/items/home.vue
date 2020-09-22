@@ -16,7 +16,7 @@ export default {
   methods: {
     drop: function () {
       api.delete('/items/' + this.$route.params.id).then(res => {
-        this.$bus.emit('updatelist', {data:'1'});
+        this.$bus.emit('items.updatelist');
         this.$router.push('/items/');
       })
     }

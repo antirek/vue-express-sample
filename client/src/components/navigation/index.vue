@@ -11,7 +11,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" v-if="isAuthenticated">
         <li class="nav-item">
           <router-link to="/items" class="nav-link"><span>Catalog</span></router-link>
         </li>
@@ -20,7 +20,7 @@
         <li class="nav-item" v-if="isProfileLoaded">
           <router-link to="/account" class="nav-link">{{ name }}</router-link>
         </li>
-        <li class="nav-item" v-if="isAuthenticated" @click="logout">
+        <li class="nav-item logout" v-if="isAuthenticated" @click="logout">
           <span class="nav-link">Logout</span>
         </li>
         <li class="nav-item" v-if="!isAuthenticated && !authLoading">
@@ -32,31 +32,6 @@
 </template>
 
 <style lang="scss" scoped>
-a {
-  color: white;
-  text-decoration: none;
-}
-.navigation {
-  display: flex;
-  color: white;
-  align-items: center;
-  background-color: #ffa035;
-  padding: 5px;
-
-  ul {
-    display: flex;
-    &:first-child {
-      flex-grow: 1;
-    }
-    li {
-      padding-right: 1em;
-    }
-  }
-}
-.brand {
-  display: flex;
-  align-items: center;
-}
 .logout {
   &:hover {
     cursor: pointer;

@@ -36,7 +36,7 @@ export default {
     sendProfile: function() {
       api.post('/items/' + this.$route.params.id, this.profile)
         .then(res => {
-          this.$bus.emit('updatelist', {data:'1'});
+          this.$bus.emit('items.updatelist');
           this.$router.push('/items/' + this.profile._id + '/profile');
         });
     }
